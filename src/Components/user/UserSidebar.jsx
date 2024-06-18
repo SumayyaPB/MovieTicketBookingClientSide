@@ -155,7 +155,7 @@ const UserSidebar = () => {
       if (!token) throw new Error("No token found");
 
       const response = await axios.get(
-        `http://localhost:3000/api/v1/user/getuser`,
+        `https://movie-ticket-bookingapplication.onrender.com/user/getuser`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

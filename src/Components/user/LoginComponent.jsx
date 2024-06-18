@@ -3,6 +3,7 @@ import './authPage.css';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
+import { ToastContainer,toast } from "react-toastify";
 import {Link, useNavigate} from 'react-router-dom'
 const userSchema = yup
   .object({
@@ -22,15 +23,22 @@ const LoginComponent=() =>{
 
   const onSubmit = async(data) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/user/login",data,{
+      const response = await axios.post("https://movie-ticket-bookingapplication.onrender.com/user/login",data,{
       withCredentials: true,
       })
       console.log(response);
       sessionStorage.setItem('token',response.data.token)
+      navigate('/');
+      if (response.ok) {
+        toast.success("Successfully Logged In")
+      }else{
+        toast.error("LogIn failed")
+      }
+
       
-        navigate('/');
     } catch (error) {
-      console.log(error)
+      console.log(error);
+
     }}
 
   
@@ -65,6 +73,7 @@ const LoginComponent=() =>{
              </p>
         </form>
     </div>
+    <ToastContainer/>
     </div>
 
   )

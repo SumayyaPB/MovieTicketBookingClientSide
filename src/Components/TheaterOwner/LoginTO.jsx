@@ -24,7 +24,7 @@ const LoginTO=() =>{
 
   const onSubmit = async(data) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/admin/adminLogin",data,{
+      const response = await axios.post("https://movie-ticket-bookingapplication.onrender.com/admin/adminLogin",data,{
       withCredentials: true,
       })
       console.log(response);

@@ -23,23 +23,10 @@ const SignupTO = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
-  // const onSubmit = async(data) => {
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:3000/api/v1/admin/adminsignup",
-  //       data,);
-  //     if (res.status === 200 || res.status === 201) {
-  //       navigate('/theaterowner/login');
-  //     } else {
-  //       console.error('Signup failed', res);
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }}
     const onSubmit = async(data) => {
       try {
         const res = await axios.post(
-          "http://localhost:3000/api/v1/admin/adminsignup",
+          "https://movie-ticket-bookingapplication.onrender.com/admin/adminsignup",
           data,)
           console.log(res.data);
           navigate('/theaterowner/login');

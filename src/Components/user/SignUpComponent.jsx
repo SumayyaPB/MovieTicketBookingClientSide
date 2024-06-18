@@ -26,7 +26,7 @@ const SignUpComponent = () => {
   const onSubmit = async(data) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/register",
+        "https://movie-ticket-bookingapplication.onrender.com/user/register",
         data,)
         console.log(res.data);
         navigate("/user/login")

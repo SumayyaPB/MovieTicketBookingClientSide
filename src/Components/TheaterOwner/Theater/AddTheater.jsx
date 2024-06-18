@@ -165,7 +165,7 @@ const CreateScreenPage = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/theater/createtheater",
+        "https://movie-ticket-bookingapplication.onrender.com/theater/createtheater",
         data,
         {
           withCredentials: true,

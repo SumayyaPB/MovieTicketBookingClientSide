@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import "./Movie.css";
 
 const genres = [
@@ -47,7 +48,7 @@ const CreateMovie = () => {
         console.log(`${pair[0]}: ${pair[1]}`);
       }
 
-      const apiUrl = "http://localhost:3000/api/v1/movie/addmovie";
+      const apiUrl = "https://movie-ticket-bookingapplication.onrender.com/movie/addmovie";
       console.log("API URL:", apiUrl);
 
       const response = await axios.post(apiUrl, formData, {
@@ -59,12 +60,21 @@ const CreateMovie = () => {
 
       console.log(response);
       sessionStorage.setItem("token", response.data.token);
+
+      if(response.ok){
+        toast.success('movieImg creation successfull')
+      }else{
+        toast.error('movie creation failed')
+      }
     } catch (error) {
       console.error("Error submitting the form:", error);
-
+      toast.error("movie Creation Failed")
       // Something else caused the error
       console.error("Error message:", error.message);
     }
+
+    
+  
   };
 
   return (
@@ -128,7 +138,9 @@ const CreateMovie = () => {
           <input type="submit" className="submit" />
         </form>
       </div>
+      <ToastContainer/>
     </div>
+    
   );
 };
 
