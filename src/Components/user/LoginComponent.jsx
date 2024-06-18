@@ -3,7 +3,6 @@ import './authPage.css';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
-import { ToastContainer,toast } from "react-toastify";
 import {Link, useNavigate} from 'react-router-dom'
 const userSchema = yup
   .object({
@@ -29,11 +28,6 @@ const LoginComponent=() =>{
       console.log(response);
       sessionStorage.setItem('token',response.data.token)
       navigate('/');
-      if (response.ok) {
-        toast.success("Successfully Logged In")
-      }else{
-        toast.error("LogIn failed")
-      }
 
       
     } catch (error) {
@@ -73,7 +67,7 @@ const LoginComponent=() =>{
              </p>
         </form>
     </div>
-    <ToastContainer/>
+    
     </div>
 
   )
