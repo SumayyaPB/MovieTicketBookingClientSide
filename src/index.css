@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root{
+    --Dark-blue: rgb(37, 67, 54);
+    --Dark-grayish-blue: rgb(107, 138, 122);
+    --Soft-gray:  rgb(183, 181, 151);
+    --light-gray: rgb(218, 211, 190);
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}

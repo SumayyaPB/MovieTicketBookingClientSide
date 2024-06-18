@@ -1,0 +1,114 @@
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links ul li {
+  margin-right: 20px;
+}
+
+.nav-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links ul li a:hover {
+  color: #f8b400;
+}
+
+.burger-menu {
+  display: none; /* Hide by default */
+  cursor: pointer;
+  padding: 10px;
+}
+
+.burger-menu span {
+  display: block;
+  background: #fff;
+  width: 25px;
+  height: 3px;
+  margin: 5px 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger-menu span:first-child {
+  transform-origin: left center;
+}
+
+.burger-menu span:last-child {
+  transform-origin: right center;
+}
+
+.nav-links.active {
+  display: block;
+}
+
+/* Example user icon styles */
+.user-icon {
+  margin-left: 5px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+.user-icon img {
+  width: 25px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #333;
+  }
+
+  .nav-links.active {
+    display: block;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links ul li {
+    margin: 15px 0;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+}

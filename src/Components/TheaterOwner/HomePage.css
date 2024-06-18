@@ -1,0 +1,55 @@
+.dashbord-div {
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+}
+.admin-dashboard {
+  margin-inline-start: 20%;
+}
+
+@media (min-width: 960px) {
+  .admin-dashboard {
+    margin: 0;
+  }
+}
+
+/* Styles for the dashboard div */
+.dashboard-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; Make the container full height */
+  background-color: #f8f9fa; /* Light background color */
+}
+
+/* Styles for the icon container */
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+/* Hover effect for the icon container */
+.icon-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Styles for the icon image */
+.icon-image {
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+/* Styles for the icon text */
+.icon-text {
+  font-size: 16px;
+  color: #333333;
+  font-weight: 600;
+}

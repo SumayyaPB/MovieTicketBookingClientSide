@@ -1,0 +1,39 @@
+.create-movie{
+    font-size: 15px;
+    font-family: sans-serif
+}
+.createmovieForm{
+    min-height: 79vh;
+    gap: 15px;
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.createmovie-input{
+    border-radius: 6px;
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    width: 80%;
+    height: 32px;
+    padding-inline-start: 10px;
+}
+.submit{
+    border-radius: 6px;
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    width: 70%;
+    height: 32px;
+    padding-inline-start: 10px; 
+    background-color: rgb(37, 67, 54);
+    color: ghostwhite;
+}
+.genre {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    gap: 9px;
+}

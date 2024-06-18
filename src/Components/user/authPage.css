@@ -1,0 +1,61 @@
+.form {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  height: 380px;
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  align-content: center;
+  background-color: ghostwhite;
+}
+.login .form{
+  height: 340px;
+}
+.login,
+.SignUp {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+input.inputs {
+  border-radius: 6px;
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+  width: 100%;
+  height: 33px;
+  padding-inline-start: 10px;
+}
+input.inputs.submit-input {
+  width: 60%;
+  background-color: rgb(37, 67, 54);
+  color: ghostwhite;
+}
+.form h2 {
+  font-weight: 600;
+  font-family: ui-serif;
+  color: rgb(37, 67, 54);
+}
+.submit-input:hover {
+  color: rgb(37, 67, 54) !important;
+  background-color: ghostwhite !important;
+}
+.firstname,
+.lastname,
+.email,
+.password {
+  width: 78%;
+}
+.firstname p,
+.lastname p,
+.email p,
+.password p {
+  margin: 0 !important;
+  color: rgb(216, 68, 68);
+}
