@@ -26,7 +26,7 @@ const SignupTO = () => {
     const onSubmit = async(data) => {
       try {
         const res = await axios.post(
-          "https://movie-ticket-bookingapplication.onrender.com/admin/adminsignup",
+          "https://movie-ticket-bookingapplication-1.onrender.com/admin/adminsignup",
           data,)
           console.log(res.data);
           navigate('/theaterowner/login');

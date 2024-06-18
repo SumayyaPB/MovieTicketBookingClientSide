@@ -22,7 +22,7 @@ const LoginComponent=() =>{
 
   const onSubmit = async(data) => {
     try {
-      const response = await axios.post("https://movie-ticket-bookingapplication.onrender.com/user/login",data,{
+      const response = await axios.post("https://movie-ticket-bookingapplication-1.onrender.com/user/login",data,{
       withCredentials: true,
       })
       console.log(response);

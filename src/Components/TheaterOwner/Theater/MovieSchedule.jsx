@@ -31,7 +31,7 @@ const Page = () => {
     if (city === "") return toast.error("Please select a city");
     try {
       const res = await axios.get(
-        `https://cosmic-tapioca-86de59.netlify.app/theater/theaterbycity/${city.toLowerCase()}`
+        `https://movie-ticket-bookingapplication-1.onrender.com/theater/theaterbycity/${city.toLowerCase()}`
       );
       console.log("Response from getScreensByCity:", res.data);
       setTheaters(res.data);
@@ -49,7 +49,7 @@ const Page = () => {
 
     try {
       const res = await axios.post(
-        "https://movie-ticket-bookingapplication.onrender.com/theater/movieschedules",
+        "https://movie-ticket-bookingapplication-1.onrender.com/theater/movieschedules",
         data,
         {
           headers: {

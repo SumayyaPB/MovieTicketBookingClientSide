@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./HomePage.css";
 import addIcon from "../../assets/addicon.svg";
-import editIcon from "../../assets/editicon.svg";
 import deleteIcon from "../../assets/deleteIcon.svg";
 
 const HomePage = () => {
