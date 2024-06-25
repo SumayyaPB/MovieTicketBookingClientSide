@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./BuyTicket.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import DatePicker from "react-horizontal-datepicker";
+
 
 const BuyTicketsPage = () => {
   const navigate = useNavigate();
@@ -84,7 +84,7 @@ const BuyTicketsPage = () => {
               {/* <h3>{ movie.genre.join(", ") }</h3> */}
               <img src={movie.movieImg} alt="" />
             </div>
-            <DatePicker
+            {/* <DatePicker
               getSelectedDay={(date) => {
                 console.log(date);
                 setSelectedDate(date);
@@ -94,7 +94,8 @@ const BuyTicketsPage = () => {
               labelFormat={"MMMM"}
               color={"rgb(248, 68, 100)"}
             />
-          </div>
+          </div> */}
+          <input type="date"/>
 
           {theatres && theatres.length > 0 && (
             <div className="screens">
