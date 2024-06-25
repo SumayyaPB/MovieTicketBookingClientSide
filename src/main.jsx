@@ -18,11 +18,11 @@ import "react-toastify/dist/ReactToastify.css";
 import MovieSchedule from "./Components/TheaterOwner/Theater/MovieSchedule";
 import SidebarPage from "./Pages/TheaterOwner/SidebarPage";
 import DeleteTheater from "./Components/TheaterOwner/Theater/DeleteTheater";
-import UserProfilePage from "./Pages/User/UserProfilePage";
+
 import BookingPage from "./Pages/User/BuyTicket";
-import ContactPage from "./Pages/User/ContactPage";
+
 import UserSidebar from "./Components/user/UserSidebar";
-import UserDashboard from "./Components/user/UserDashboard";
+
 import MoviePage from "./Pages/User/MoviePage";
 import SelectSeatPage from "./Pages/User/SelectSeatPage";
 
@@ -56,23 +56,11 @@ const router = createBrowserRouter([
         element: <SelectSeatPage />
       },
       
-      {
-        path: "/contact",
-        element: <ContactPage />,
-      },
+      
       {
         path: "/userDashboard",
         element: <UserSidebar/>,
-        children: [
-          {
-             path:"/userDashboard/dashboard",
-             element:<UserDashboard/>
-          },
-          {
-            path: "/userDashboard/profile",
-            element: <UserProfilePage />,
-          }
-        ]
+        
       }
     ]
   }, 
