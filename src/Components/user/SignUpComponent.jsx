@@ -5,6 +5,7 @@ import * as yup from "yup";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import {Link} from 'react-router-dom'
+import { toast } from "react-toastify";
 
 const userSchema = yup
   .object({
@@ -12,6 +13,7 @@ const userSchema = yup
     lastName: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().required().min(6),
+    city: yup.string().required()
   })
   .required();
 
@@ -26,11 +28,12 @@ const SignUpComponent = () => {
   const onSubmit = async(data) => {
     try {
       const res = await axios.post(
-        "https://movie-ticket-bookingapplication.onrender.com/user/register",
+        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/register",
         data,)
         console.log(res.data);
         navigate("/user/login")
     } catch (error) {
+      toast.error(error.message)
       console.log(error)
     }}
     
@@ -71,6 +74,14 @@ const SignUpComponent = () => {
             className="inputs"
           />
           {errors.password && <p>{errors.password.message}</p>}
+        </div>
+        <div className="city">
+          <input
+            {...register("city")}
+            placeholder="city"
+            className="inputs"
+          />
+          {errors.city && <p>{errors.city.message}</p>}
         </div>
 
         <input type="Submit" className="inputs submit-input" />

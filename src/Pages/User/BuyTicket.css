@@ -1,0 +1,77 @@
+.buytickets .head{
+    background-color: var(--col2);
+    padding: 20px;
+}
+.buytickets{
+    background-color: rgb(228, 228, 228);
+    min-height: 100vh;
+    width: 100%;
+}
+.buytickets .head h1{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+
+.buytickets .head h3{
+    color: gray;
+    font-size: 13px;
+    font-weight: 600;
+
+    border: 1px solid gray;
+    padding: 5px 20px;
+    border-radius: 25px;
+    width: fit-content;
+}
+
+.buytickets .screens{
+    width: 50%;
+    margin: 20px auto;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.buytickets .screens .screen{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+    padding: 10px;
+    /* border-radius: 10px; */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.buytickets .screens .screen:last-child{
+    border-bottom: none;
+}
+.buytickets .screens .screen h2{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.buytickets .screens .screen h3{
+    font-size: 15px;
+    font-weight: 600;
+}
+button.theme_btn1.linkstylenone {
+    border: none;
+    width: 100px;
+    background-color: #4a744a;
+    color: white;
+    height: 35px;
+    border-radius: 5px;
+}
+input[type="date"] {
+    width: 17%;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 35px;
+    border-radius: 5px;
+    margin-bottom: 13px;
+}
+.buytickets .s1 {
+    background-color: #97ad8d;
+}

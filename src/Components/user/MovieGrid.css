@@ -1,0 +1,9 @@
+.movieimg{
+  width: 200px;
+}
+.rating {
+  font-size: 1em !important;
+  margin-bottom: 10px;
+  background-color: black;
+  color: white;
+}

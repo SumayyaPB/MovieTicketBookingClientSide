@@ -26,7 +26,7 @@ const SignupTO = () => {
     const onSubmit = async(data) => {
       try {
         const res = await axios.post(
-          "https://movie-ticket-bookingapplication-1.onrender.com/admin/adminsignup",
+          "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/admin/adminsignup",
           data,)
           console.log(res.data);
           navigate('/theaterowner/login');
@@ -38,7 +38,7 @@ const SignupTO = () => {
   return (
     <div className="container d-flex align-items-center justify-content-center ">
       <div className="SignUp">
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <form onSubmit={handleSubmit(onSubmit)} className="form" >
         <h2>SIGNUP</h2>
         <div className="name">
           <input

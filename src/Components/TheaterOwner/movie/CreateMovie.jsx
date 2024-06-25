@@ -48,7 +48,7 @@ const CreateMovie = () => {
         console.log(`${pair[0]}: ${pair[1]}`);
       }
 
-      const apiUrl = "https://movie-ticket-bookingapplication-1.onrender.com/movie/addmovie";
+      const apiUrl = "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/addmovie";
       console.log("API URL:", apiUrl);
 
       const response = await axios.post(apiUrl, formData, {

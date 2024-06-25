@@ -1,0 +1,20 @@
+li.nav-item {
+    border: 1px solid black;
+}
+.btn{
+    background-color:rgb(37, 67, 54); 
+    color: white;
+    z-index: 10;
+}
+
+.carousel-item img{
+  height: 80vh;
+}
+.movie-slider-wrapper h2{
+  color: rgb(37, 67, 54);
+}
+hr{
+  height: 0.2rem;
+  color: black;
+  background-color: rgb(107, 138, 122);
+}

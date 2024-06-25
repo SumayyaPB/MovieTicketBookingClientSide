@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Root from "./Pages/Root";
@@ -18,10 +19,12 @@ import MovieSchedule from "./Components/TheaterOwner/Theater/MovieSchedule";
 import SidebarPage from "./Pages/TheaterOwner/SidebarPage";
 import DeleteTheater from "./Components/TheaterOwner/Theater/DeleteTheater";
 import UserProfilePage from "./Pages/User/UserProfilePage";
-import BookingPage from "./Pages/User/BookingPage";
+import BookingPage from "./Pages/User/BuyTicket";
 import ContactPage from "./Pages/User/ContactPage";
 import UserSidebar from "./Components/user/UserSidebar";
 import UserDashboard from "./Components/user/UserDashboard";
+import MoviePage from "./Pages/User/MoviePage";
+import SelectSeatPage from "./Pages/User/SelectSeatPage";
 
 const router = createBrowserRouter([
   {
@@ -41,9 +44,18 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/booking",
+        path:'/movies/:_id',
+        element:<MoviePage/>
+      },
+      {
+        path: "/movies/:_id/buytickets",
         element: <BookingPage />,
       },
+      {
+        path: `/theater/:theater_id/:date/:_id`,
+        element: <SelectSeatPage />
+      },
+      
       {
         path: "/contact",
         element: <ContactPage />,

@@ -1,0 +1,30 @@
+.footer{
+    background-color: black;
+    color: white;
+    height: fit-content;
+    padding: 2rem;
+    cursor: pointer;
+}
+
+h2{
+    font-size: 1.3rem;
+    color: rgb(107, 138, 122);
+}
+ul li:hover{
+    color: rgb(107, 138, 122);
+}
+.line {
+    width: 50%; /* Adjust as needed, e.g., 50% */
+    height: 2px;
+    background-color: white;
+    position: relative;
+  }
+  
+  .line::before {
+    content: '';
+    position: absolute;
+    width: 50%; /* Adjust as needed */
+    height: 100%;
+    background-color: rgb(107, 138, 122);
+    left: 0;
+  }

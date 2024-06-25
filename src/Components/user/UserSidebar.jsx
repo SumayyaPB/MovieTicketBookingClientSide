@@ -155,12 +155,13 @@ const UserSidebar = () => {
       if (!token) throw new Error("No token found");
 
       const response = await axios.get(
-        `https://movie-ticket-bookingapplication-1.onrender.com/user/getuser`,
+        `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/getuser`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
 
           },
+          withCredentials: true,
         }
       );
       setUser(response.data);
@@ -178,7 +179,7 @@ const UserSidebar = () => {
       }
 
       const response = await axios.get(
-        "https://movie-ticket-bookingapplication-1.onrender.com/checklogin",
+        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/checklogin",
         {
           headers: {
             "Content-Type": "application/json",
@@ -208,11 +209,25 @@ const UserSidebar = () => {
     checkUserAuthentication();
   }, [checkUserAuthentication]);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    setIsUserAuthenticated(false);
-    setUser(null);
-    navigate("/"); // Redirect to home or login page after logout
+  
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/logout", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
+      console.log(response.data);
+      if (response.status === 200) {
+        setIsUserAuthenticated(false);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      setIsUserAuthenticated(false);
+      navigate("/");
+    }
   };
 
   const toggleSidebar = () => {

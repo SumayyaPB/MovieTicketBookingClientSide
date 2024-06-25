@@ -12,7 +12,7 @@ const Sidebar = () => {
     try {
       const token = sessionStorage.getItem("token");
       const response = await axios.get(
-        "https://movie-ticket-bookingapplication-1.onrender.com/admin/checkLogin",
+        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/admin/checkLogin",
         {
           headers: {
             "Content-Type": "application/json",

@@ -1,5 +1,5 @@
 header {
-  background-color: #333;
+  background-color:  rgb(107, 138, 122);
   color: #fff;
   padding: 10px 0;
 }
@@ -11,6 +11,7 @@ header {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  z-index: 10;
 }
 
 .logo a {
@@ -82,6 +83,35 @@ header {
 }
 .user-icon img {
   width: 25px;
+  color: white;
+}
+.login-user{
+  text-align: center;
+  border: 1px solid  rgb(107, 138, 122);;
+  width: 64px;
+  border-radius: 4px;
+  background-color: rgb(37, 67, 54);
+  height: 30px;
+}
+
+.logout-button {
+  border-radius: 3px;
+  width: 62px;
+  height: 30px;
+  border: none;
+  background-color: rgb(166 51 51);
+  color: white;
+}
+img.movieLogo {
+  width: 50px;
+  height: 40px;
+}
+.logo a {
+  color: black;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+
 }
 
 /* Responsive styles */

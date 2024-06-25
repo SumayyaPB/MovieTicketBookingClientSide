@@ -51,21 +51,6 @@ const HomePage = () => {
             </div>
           </div>
         </Link>
-        {/* <Link
-          className="sidebar-link text-decoration-none text-dark"
-          to="/theaterowner/components/theater/updateTheater"
-        >
-          <div className="dashboard-div">
-            <div className="icon-container">
-              <img
-                src={editIcon}
-                alt="Edit Movie Icon"
-                className="icon-image"
-              />
-              <span className="icon-text">Update Theater</span>
-            </div>
-          </div>
-        </Link> */}
         <Link
           className="sidebar-link text-decoration-none text-dark"
           to="/theaterowner/components/theater/deleteTheater"
