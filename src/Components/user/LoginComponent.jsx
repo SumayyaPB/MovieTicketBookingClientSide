@@ -20,53 +20,22 @@ const LoginComponent=() =>{
     formState : {errors}
   } = useForm({resolver : yupResolver(userSchema)})
 
-  // const onSubmit = async(data) => {
-  //   try {
-  //     const response = await axios.post("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/login",data,{
-  //     withCredentials: true,
-  //     })
-  //     console.log(response);
-  //     sessionStorage.setItem('token',response.data.token)
-  //     navigate('/');
-
-      
-  //   } catch (error) {
-  //     console.log(error);
-
-  //   }}
-
-  const onSubmit = async (data) => {
+  const onSubmit = async(data) => {
     try {
-      const response = await axios.post("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/login", data, {
-        withCredentials: true,
-      });
-      console.log("Login response:", response);
-      
-      // Assuming response.data.token exists and is valid
-      sessionStorage.setItem('token', response.data.token);
-      navigate('/'); // Redirect to home page after successful login
-      
-      // Optionally, you might want to trigger a function to check login status or update user information
-      // checkLoginStatus();
+      const response = await axios.post("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/login",data,{
+      withCredentials: true,
+      })
+      console.log(response);
+      sessionStorage.setItem('token',response.data.token)
+      navigate('/');
+
       
     } catch (error) {
-      console.error("Login error:", error);
-      // Handle specific error scenarios (e.g., display error message to user)
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        console.error("Server responded with:", error.response.data);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error("No response received:", error.request);
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error("Error setting up request:", error.message);
-      }
-      
-      // Handle UI feedback for login failure (e.g., show error message to user)
-      // setError("Login failed. Please check your credentials.");
-    }
-  };
+      console.log(error);
+
+    }}
+
+  
   
 
   return (

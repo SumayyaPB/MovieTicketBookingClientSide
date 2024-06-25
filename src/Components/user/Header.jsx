@@ -37,9 +37,18 @@ const Header = () => {
 
   const checkLoginStatus = async () => {
     try {
+      const token = sessionStorage.getItem('token');
+
+      // If no token is found, consider the user as not logged in
+      if (!token) {
+        setIsLoggedIn(false);
+        return;
+      }
       const response = await axios.get("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/checklogin", {
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include the token here
+          
         },
         withCredentials: true,
       });
