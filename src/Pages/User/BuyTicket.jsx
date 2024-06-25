@@ -84,7 +84,7 @@ const BuyTicketsPage = () => {
               {/* <h3>{ movie.genre.join(", ") }</h3> */}
               <img src={movie.movieImg} alt="" />
             </div>
-            {/* <DatePicker
+             {/* <DatePicker
               getSelectedDay={(date) => {
                 console.log(date);
                 setSelectedDate(date);
@@ -93,8 +93,8 @@ const BuyTicketsPage = () => {
               selectDate={selectedDate}
               labelFormat={"MMMM"}
               color={"rgb(248, 68, 100)"}
-            />
-          </div> */}
+            /> */}
+          </div>  
           <input type="date"/>
 
           {theatres && theatres.length > 0 && (
