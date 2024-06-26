@@ -9,7 +9,7 @@ const BuyTicketsPage = () => {
   const params = useParams();
   const { _id } = params;
 
-  const [selectedDate, setSelectedDate] = useState(null); // Initialize to today's date in YYYY-MM-DD format new Date().toISOString().split('T')[0]
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [movie, setMovie] = useState(null);
   const [theatres, setTheatres] = useState(null);
 
@@ -27,14 +27,15 @@ const BuyTicketsPage = () => {
         );
         if (response.status === 200) {
           setMovie(response.data);
+          console.log("Movie data:", response.data);
         } else {
-          console.error(response.data);
+          console.error("Error fetching movie data:", response.data);
         }
       } else {
         console.error("Movie ID is undefined");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Error:", err);
     }
   };
 
@@ -51,11 +52,12 @@ const BuyTicketsPage = () => {
       );
       if (response.status === 200) {
         setTheatres(response.data);
+        console.log("Theatre data:", response.data);
       } else {
-        console.error(response.data);
+        console.error("Error fetching theatres:", response.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   };
 
@@ -74,6 +76,7 @@ const BuyTicketsPage = () => {
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
+    console.log("Selected date:", event.target.value);
   };
 
   return (
@@ -83,7 +86,6 @@ const BuyTicketsPage = () => {
           <div className="s1 d-flex flex-column justify-content-center align-items-center">
             <div className="head">
               <h1 className="text-center">{movie.title}</h1>
-              {/* <h3>{ movie.genre.join(", ") }</h3> */}
               <img src={movie.movieImg} alt="" />
             </div>
             <input 

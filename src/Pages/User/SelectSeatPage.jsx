@@ -83,13 +83,13 @@ const SelectSeatPage = () => {
         }
     };
 
-    const generateSeatLayout = () => {
-      if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
+    // const generateSeatLayout = () => {
+    //   if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
 
-      const x = screen.movieSchedulesforDate.findIndex(
-          (t) => t.showTime === selectedTime.showTime
-      );
-      const notAvailableSeats = screen.movieSchedulesforDate[x].seats;
+    //   const x = screen.movieSchedulesforDate.findIndex(
+    //       (t) => t.showTime === selectedTime.showTime
+    //   );
+    //   const notAvailableSeats = screen.movieSchedulesforDate[x].seats;
 
       return (
           <div>
@@ -152,95 +152,97 @@ const SelectSeatPage = () => {
           </div>
       );
   };
+}
+  export default SelectSeatPage;
 
-  const handleBooking = async () => {
-    try {
-        const response = await axios.post(
-            `https://movie-ticket-bookingapplication-1.onrender.com/booking/bookticket`,
-            {
-                showTime: selectedTime.showTime,
-                showDate: date,
-                movieId: _id, // Changed to _id which seems to be the correct parameter
-                screenId: theater_id, // Ensure screen is defined
-                seats: selectedSeats,
-                totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
-                paymentId: '123456789',
-                paymentType: 'online',
-            },
-            { withCredentials: true }
-        );
 
-        if (response.data.ok) {
-            toast.success('Booking Successful');
-            console.log(response.data);
-        } else {
-            console.log(response.data);
-        }
-    } catch (error) {
-        console.log(error);
-    }
-};
+//   const handleBooking = async () => {
+//     try {
+//         const response = await axios.post(
+//             https://movie-ticket-bookingapplication-1.onrender.com/booking/bookticket,
+//             {
+//                 showTime: selectedTime.showTime,
+//                 showDate: date,
+//                 movieId: _id, // Changed to _id which seems to be the correct parameter
+//                 screenId: theater_id, // Ensure screen is defined
+//                 seats: selectedSeats,
+//                 totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
+//                 paymentId: '123456789',
+//                 paymentType: 'online',
+//             },
+//             { withCredentials: true }
+//         );
 
-    return (
-        <div className='selectseatpage'>
-            {movie && screen && (
-                <div className='s1'>
-                    <div className='head'>
-                        <h1>{movie.title} - {screen?.screen?.name}</h1>
-                        {Array.isArray(movie.genre) && <h3>{movie.genre.join(' / ')}</h3>} {/* Check if movie.genre is an array */}
-                    </div>
-                </div>
-            )}
+//         if (response.data.ok) {
+//             toast.success('Booking Successful');
+//             console.log(response.data);
+//         } else {
+//             console.log(response.data);
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 
-            {screen && (
-                <div className='selectseat'>
-                    <div className='timecont'>
-                        {screen.movieSchedulesforDate.map((time, index) => (
-                            <h3
-                                key={index}
-                                className={selectedTime?._id === time._id ? 'time selected' : 'time'}
-                                onClick={() => {
-                                    setSelectedTime(time);
-                                    setSelectedSeats([]);
-                                }}
-                            >
-                                {time.showTime}
-                            </h3>
-                        ))}
-                    </div>
-                    <div className='indicators'>
-                        <div>
-                            <span className='seat-unavailable'></span>
-                            <p>Not available</p>
-                        </div>
-                        <div>
-                            <span className='seat-available'></span>
-                            <p>Available</p>
-                        </div>
-                        <div>
-                            <span className='seat-selected'></span>
-                            <p>Selected</p>
-                        </div>
-                    </div>
+//     return (
+//         <div className='selectseatpage'>
+//             {movie && screen && (
+//                 <div className='s1'>
+//                     <div className='head'>
+//                         <h1>{movie.title} - {screen?.screen?.name}</h1>
+//                         {Array.isArray(movie.genre) && <h3>{movie.genre.join(' / ')}</h3>} {/* Check if movie.genre is an array */}
+//                     </div>
+//                 </div>
+//             )}
 
-                    {generateSeatLayout()}
+//             {screen && (
+//                 <div className='selectseat'>
+//                     <div className='timecont'>
+//                         {screen.movieSchedulesforDate.map((time, index) => (
+//                             <h3
+//                                 key={index}
+//                                 className={selectedTime?._id === time._id ? 'time selected' : 'time'}
+//                                 onClick={() => {
+//                                     setSelectedTime(time);
+//                                     setSelectedSeats([]);
+//                                 }}
+//                             >
+//                                 {time.showTime}
+//                             </h3>
+//                         ))}
+//                     </div>
+//                     <div className='indicators'>
+//                         <div>
+//                             <span className='seat-unavailable'></span>
+//                             <p>Not available</p>
+//                         </div>
+//                         <div>
+//                             <span className='seat-available'></span>
+//                             <p>Available</p>
+//                         </div>
+//                         <div>
+//                             <span className='seat-selected'></span>
+//                             <p>Selected</p>
+//                         </div>
+//                     </div>
 
-                    <div className='totalcont'>
-                        <div className='total'>
-                            <h2>Total</h2>
-                            <h3>Rs. {selectedSeats.reduce((acc, seat) => acc + seat.price, 0)}</h3>
-                        </div>
-                        <button className='theme_btn1 linkstylenone' onClick={handleBooking}>
-                            Book Now
-                        </button>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
-};
+//                     {generateSeatLayout()}
 
-export default SelectSeatPage;
+//                     <div className='totalcont'>
+//                         <div className='total'>
+//                             <h2>Total</h2>
+//                             <h3>Rs. {selectedSeats.reduce((acc, seat) => acc + seat.price, 0)}</h3>
+//                         </div>
+//                         <button className='theme_btn1 linkstylenone' onClick={handleBooking}>
+//                             Book Now
+//                         </button>
+//                     </div>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+
 
 
 
