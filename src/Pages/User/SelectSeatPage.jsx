@@ -243,7 +243,6 @@
 //     );
 // };
 
-
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import './SelectSeat.css';
@@ -262,18 +261,18 @@ const SelectSeatPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch movie schedule by theater_id, date, and _id
                 const response = await axios.get(
                     `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
                     { withCredentials: true }
                 );
                 if (response.status === 200) {
                     const data = response.data;
-                    console.log(data , data.movieSchedulesforDate )
+                    console.log('Schedule Data:', data);
                     if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
-                        console.log(data , data.movieSchedulesforDate )
                         setScreen(data);
                         setSelectedTime(data.movieSchedulesforDate[0]);
+                    } else {
+                        console.error('No movie schedules found.');
                     }
                 } else {
                     console.error('Failed to fetch movie schedule:', response.data);
@@ -289,15 +288,9 @@ const SelectSeatPage = () => {
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                // Fetch movie details by _id
                 const response = await axios.get(
                     `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/getmovies/${_id}`,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        withCredentials: true,
-                    }
+                    { withCredentials: true }
                 );
                 if (response.status === 200) {
                     setMovie(response.data);
@@ -329,7 +322,7 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-        if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
+        if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null;
 
         return (
             <div>
@@ -347,7 +340,7 @@ const SelectSeatPage = () => {
                                                     <div key={seatIndex}>
                                                         <span
                                                             className={
-                                                                screen.movieSchedulesforDate[0].notAvailableSeats.find(
+                                                                screen.movieSchedulesforDate[0]?.notAvailableSeats.find(
                                                                     (s) =>
                                                                         s.row === row.rowname &&
                                                                         s.seat_id === seat.seat_id &&
