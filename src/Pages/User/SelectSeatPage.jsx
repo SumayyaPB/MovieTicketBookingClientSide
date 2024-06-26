@@ -16,56 +16,56 @@ const SelectSeatPage = () => {
     const [selectedTime, setSelectedTime] = useState(null);
     const [movie, setMovie] = useState(null);
     const [selectedSeats, setSelectedSeats] = useState([]);
-    console.log(_id, date, theater_id)
 
-    const getSchedules = async () => {
-        try {
-            const response = await axios.get(
-                `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
-                { withCredentials: true }
-            );
-            if (response.status === 200) {
-                const data = response.data;
-                if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
-                    setTheater(data);
-                    setSelectedTime(data.movieSchedulesforDate[0]);
-                }
-                console.log(data.movieSchedulesforDate[0])
-                console.log(response.data)
-            } else {
-                console.log(response.data);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const getMovie = async () => {
-        try {
-            if (_id) {
-                const response = await axios.get(`https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/getmovies/${_id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    withCredentials: true,
-                });
+    useEffect(() => {
+        const getSchedules = async () => {
+            try {
+                const response = await axios.get(
+                    `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
+                    { withCredentials: true }
+                );
                 if (response.status === 200) {
-                    setMovie(response.data);
+                    const data = response.data;
+                    if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
+                        setTheater(data);
+                        setSelectedTime(data.movieSchedulesforDate[0]);
+                    }
                 } else {
                     console.error(response.data);
                 }
-            } else {
-                console.error("Movie ID is undefined");
+            } catch (error) {
+                console.error(error);
             }
-        } catch (err) {
-            console.error(err);
-        }
-    };
+        };
 
-    useEffect(() => {
+        const getMovie = async () => {
+            try {
+                if (_id) {
+                    const response = await axios.get(
+                        `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/getmovies/${_id}`,
+                        {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            withCredentials: true,
+                        }
+                    );
+                    if (response.status === 200) {
+                        setMovie(response.data);
+                    } else {
+                        console.error(response.data);
+                    }
+                } else {
+                    console.error('Movie ID is undefined');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
         getSchedules();
         getMovie();
-    }, []);
+    }, [_id, date, theater_id]);
 
     const selectDeselectSeat = (seat) => {
         const isSelected = selectedSeats.find(
@@ -84,7 +84,7 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-        if (!theater || !selectedTime || !theater.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
+        if (!theater || !selectedTime || !theater.movieSchedulesforDate) return null;
 
         const schedule = theater.movieSchedulesforDate.find(
             (t) => t.showTime === selectedTime.showTime
@@ -96,7 +96,7 @@ const SelectSeatPage = () => {
                 {theater.theater.seats.map((seatType, index) => (
                     <div className="seat-type" key={index}>
                         <h2>{seatType.type} - Rs. {seatType.price}</h2>
-                        <div className='seat-rows'>
+                        <div className="seat-rows">
                             {seatType.rows.map((row, rowIndex) => (
                                 <div className="seat-row" key={rowIndex}>
                                     <p className="rowname">{row.rowname}</p>
@@ -111,7 +111,7 @@ const SelectSeatPage = () => {
                                                                 s.seat_id === seat.seat_id &&
                                                                 s.col === colIndex
                                                         ) ? (
-                                                            <span className='seat-unavailable'>{seatIndex + 1}</span>
+                                                            <span className="seat-unavailable">{seatIndex + 1}</span>
                                                         ) : (
                                                             <span
                                                                 className={
@@ -174,18 +174,18 @@ const SelectSeatPage = () => {
                 toast.success('Booking Successful');
                 console.log(response.data);
             } else {
-                console.log(response.data);
+                console.error(response.data);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
     return (
-        <div className='selectseatpage'>
+        <div className="selectseatpage">
             {movie && theater && (
-                <div className='s1'>
-                    <div className='head'>
+                <div className="s1">
+                    <div className="head">
                         <h1>{movie.title} - {theater?.theater?.name}</h1>
                         {Array.isArray(movie.genre) && <h3>{movie.genre.join(' / ')}</h3>}
                     </div>
@@ -193,8 +193,8 @@ const SelectSeatPage = () => {
             )}
 
             {theater && (
-                <div className='selectseat'>
-                    <div className='timecont'>
+                <div className="selectseat">
+                    <div className="timecont">
                         {theater.movieSchedulesforDate.map((time, index) => (
                             <h3
                                 key={index}
@@ -208,29 +208,29 @@ const SelectSeatPage = () => {
                             </h3>
                         ))}
                     </div>
-                    <div className='indicators'>
+                    <div className="indicators">
                         <div>
-                            <span className='seat-unavailable'></span>
+                            <span className="seat-unavailable"></span>
                             <p>Not available</p>
                         </div>
                         <div>
-                            <span className='seat-available'></span>
+                            <span className="seat-available"></span>
                             <p>Available</p>
                         </div>
                         <div>
-                            <span className='seat-selected'></span>
+                            <span className="seat-selected"></span>
                             <p>Selected</p>
                         </div>
                     </div>
 
                     {generateSeatLayout()}
 
-                    <div className='totalcont'>
-                        <div className='total'>
+                    <div className="totalcont">
+                        <div className="total">
                             <h2>Total</h2>
                             <h3>Rs. {selectedSeats.reduce((acc, seat) => acc + seat.price, 0)}</h3>
                         </div>
-                        <button className='theme_btn1 linkstylenone' onClick={handleBooking}>
+                        <button className="theme_btn1 linkstylenone" onClick={handleBooking}>
                             Book Now
                         </button>
                     </div>
@@ -241,6 +241,7 @@ const SelectSeatPage = () => {
 };
 
 export default SelectSeatPage;
+
 
 
 
