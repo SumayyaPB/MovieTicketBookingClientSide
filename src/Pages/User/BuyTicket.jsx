@@ -74,6 +74,10 @@ const BuyTicketsPage = () => {
     getTheatres();
   }, []);
 
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+};
+
   return (
     <>
       {movie && (
@@ -94,8 +98,13 @@ const BuyTicketsPage = () => {
               labelFormat={"MMMM"}
               color={"rgb(248, 68, 100)"}
             /> */}
+            <input 
+            type="date" 
+            value={selectedDate} 
+            onChange={handleDateChange} 
+        />
           </div>  
-          <input type="date"/>
+          
 
           {theatres && theatres.length > 0 && (
             <div className="screens">
