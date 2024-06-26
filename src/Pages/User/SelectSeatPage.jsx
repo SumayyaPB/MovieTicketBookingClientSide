@@ -22,7 +22,7 @@ const SelectSeatPage = () => {
     const getSchedules = async () => {
       try {
           const response = await axios.get(
-              `http://localhost:3000/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
+              `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
               { withCredentials: true }
           );
           if (response.status === 200) {
@@ -43,7 +43,7 @@ const SelectSeatPage = () => {
     const getMovie = async () => {
         try {
             if (_id) {
-                const response = await axios.get(`http://localhost:3000/api/v1/movie/getmovies/${_id}`, {
+                const response = await axios.get(`https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/getmovies/${_id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -156,7 +156,7 @@ const SelectSeatPage = () => {
   const handleBooking = async () => {
     try {
         const response = await axios.post(
-            `http://localhost:3000/booking/bookticket`,
+            `https://movie-ticket-bookingapplication-1.onrender.com/booking/bookticket`,
             {
                 showTime: selectedTime.showTime,
                 showDate: date,
