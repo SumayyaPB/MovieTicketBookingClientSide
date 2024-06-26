@@ -30,6 +30,7 @@ const SelectSeatPage = () => {
                     setTheater(data);
                     setSelectedTime(data.movieSchedulesforDate[0]);
                 }
+                console.log(data.movieSchedulesforDate[0])
                 console.log(response.data)
             } else {
                 console.log(response.data);
