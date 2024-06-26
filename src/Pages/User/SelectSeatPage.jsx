@@ -322,7 +322,7 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-        if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null;
+        // if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null;
     
         return (
             <div>
