@@ -298,6 +298,7 @@ const SelectSeatPage = () => {
         );
         if (response.status === 200) {
           setMovie(response.data);
+          console.log("Movie Data:", response.data);
         } else {
           console.error("Failed to fetch movie details:", response.data);
         }
