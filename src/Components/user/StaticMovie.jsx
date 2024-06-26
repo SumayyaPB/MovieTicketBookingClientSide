@@ -5,7 +5,7 @@ import "./StaticMovie.css";
 
 const StaticMovie = ({ title, img }) => {
   return (
-    <div className="staticmovie">
+    <div className="staticmovie d-flex flex-wrap">
       <div className="card" style={{ width: "15rem", height: "21rem" }}>
         <img src={img} className="card-img-top" alt="..." />
 
