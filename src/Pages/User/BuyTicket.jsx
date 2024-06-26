@@ -9,7 +9,7 @@ const BuyTicketsPage = () => {
   const params = useParams();
   const { _id } = params;
 
-  const [selectedDate, setSelectedDate] = useState(); // Initialize to today's date in YYYY-MM-DD format new Date().toISOString().split('T')[0]
+  const [selectedDate, setSelectedDate] = useState(null); // Initialize to today's date in YYYY-MM-DD format new Date().toISOString().split('T')[0]
   const [movie, setMovie] = useState(null);
   const [theatres, setTheatres] = useState(null);
 
