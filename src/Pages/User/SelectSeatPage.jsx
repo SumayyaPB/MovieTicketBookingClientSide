@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import './SelectSeat.css';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
@@ -241,6 +240,7 @@ const SelectSeatPage = () => {
 };
 
 export default SelectSeatPage;
+
 
 
 
