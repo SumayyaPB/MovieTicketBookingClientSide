@@ -12,7 +12,7 @@ const SelectSeatPage = () => {
 
     const { _id, date, theater_id } = params;
 
-    const [screen, setScreen] = useState(null);
+    const [theater, setTheater] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
     const [movie, setMovie] = useState(null);
     const [selectedSeats, setSelectedSeats] = useState([]);
@@ -27,7 +27,7 @@ const SelectSeatPage = () => {
             if (response.status === 200) {
                 const data = response.data;
                 if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
-                    setScreen(data);
+                    setTheater(data);
                     setSelectedTime(data.movieSchedulesforDate[0]);
                 }
                 console.log(response.data)
@@ -83,16 +83,16 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-        if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
+        if (!theater || !selectedTime || !theater.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
 
-        const schedule = screen.movieSchedulesforDate.find(
+        const schedule = theater.movieSchedulesforDate.find(
             (t) => t.showTime === selectedTime.showTime
         );
         const notAvailableSeats = schedule ? schedule.notAvailableSeats : [];
 
         return (
             <div>
-                {screen.screen.seats.map((seatType, index) => (
+                {theater.theater.seats.map((seatType, index) => (
                     <div className="seat-type" key={index}>
                         <h2>{seatType.type} - Rs. {seatType.price}</h2>
                         <div className='seat-rows'>
@@ -160,7 +160,7 @@ const SelectSeatPage = () => {
                     showTime: selectedTime.showTime,
                     showDate: date,
                     movieId: _id,
-                    screenId: theater_id,
+                    theater_iId: theater_id,
                     seats: selectedSeats,
                     totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
                     paymentId: '123456789',
@@ -182,19 +182,19 @@ const SelectSeatPage = () => {
 
     return (
         <div className='selectseatpage'>
-            {movie && screen && (
+            {movie && theater && (
                 <div className='s1'>
                     <div className='head'>
-                        <h1>{movie.title} - {screen?.screen?.name}</h1>
+                        <h1>{movie.title} - {theater?.theater?.name}</h1>
                         {Array.isArray(movie.genre) && <h3>{movie.genre.join(' / ')}</h3>}
                     </div>
                 </div>
             )}
 
-            {screen && (
+            {theater && (
                 <div className='selectseat'>
                     <div className='timecont'>
-                        {screen.movieSchedulesforDate.map((time, index) => (
+                        {theater.movieSchedulesforDate.map((time, index) => (
                             <h3
                                 key={index}
                                 className={selectedTime?._id === time._id ? 'time selected' : 'time'}
