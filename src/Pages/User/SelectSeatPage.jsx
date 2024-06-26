@@ -270,9 +270,9 @@ const SelectSeatPage = () => {
                     console.log('Schedule Data:', data);
                     if (data && data.movieSchedules && data.movieSchedules.length > 0) {
                         setScreen(data);
-                        setSelectedTime(data.movieSchedules[0]);
+                        
                     } else {
-                        console.error('No movie schedules found.');
+                        console.log(response.data);
                     }
                 } else {
                     console.error('Failed to fetch movie schedule:', response.data);
