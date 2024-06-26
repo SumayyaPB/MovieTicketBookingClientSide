@@ -9,7 +9,6 @@ const SelectSeatPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const params = useParams();
-    const searchParams = new URLSearchParams(location.search);
 
     const { _id, date, theater_id } = params;
 
@@ -17,28 +16,28 @@ const SelectSeatPage = () => {
     const [selectedTime, setSelectedTime] = useState(null);
     const [movie, setMovie] = useState(null);
     const [selectedSeats, setSelectedSeats] = useState([]);
-    console.log(_id, date, theater_id )
+    console.log(_id, date, theater_id)
 
     const getSchedules = async () => {
-      try {
-          const response = await axios.get(
-              `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
-              { withCredentials: true }
-          );
-          if (response.status === 200) {
-              const data = response.data;
-              if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
-                  setScreen(response.data);
-                  setSelectedTime(data.movieSchedulesforDate[0]);
-              }
-              console.log(response.data)
+        try {
+            const response = await axios.get(
+                `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
+                { withCredentials: true }
+            );
+            if (response.status === 200) {
+                const data = response.data;
+                if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
+                    setScreen(data);
+                    setSelectedTime(data.movieSchedulesforDate[0]);
+                }
+                console.log(response.data)
             } else {
-              console.log(response.data);
+                console.log(response.data);
             }
-      } catch (error) {
-          console.log(error);
-      }
-  };
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const getMovie = async () => {
         try {
@@ -84,102 +83,102 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-      if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
+        if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
 
-      const x = screen.movieSchedulesforDate.findIndex(
-          (t) => t.showTime === selectedTime.showTime
-      );
-      const notAvailableSeats = screen.movieSchedulesforDate[x].seats;
-
-      return (
-          <div>
-              {screen.screen.seats.map((seatType, index) => (
-                  <div className="seat-type" key={index}>
-                      <h2>{seatType.type} - Rs. {seatType.price}</h2>
-                      <div className='seat-rows'>
-                          {seatType.rows.map((row, rowIndex) => (
-                              <div className="seat-row" key={rowIndex}>
-                                  <p className="rowname">{row.rowname}</p>
-                                  <div className="seat-cols">
-                                      {row.cols.map((col, colIndex) => (
-                                          <div className="seat-col" key={colIndex}>
-                                              {col.seats.map((seat, seatIndex) => (
-                                                  <div key={seatIndex}>
-                                                      {notAvailableSeats.find(
-                                                          (s) =>
-                                                              s.row === row.rowname &&
-                                                              s.seat_id === seat.seat_id &&
-                                                              s.col === colIndex
-                                                      ) ? (
-                                                          <span className='seat-unavailable'>{seatIndex + 1}</span>
-                                                      ) : (
-                                                          <span
-                                                              className={
-                                                                  selectedSeats.find(
-                                                                      (s) =>
-                                                                          s.row === row.rowname &&
-                                                                          s.seat_id === seat.seat_id &&
-                                                                          s.col === colIndex
-                                                                  )
-                                                                      ? 'seat-selected'
-                                                                      : 'seat-available'
-                                                              }
-                                                              onClick={() =>
-                                                                  selectDeselectSeat({
-                                                                      row: row.rowname,
-                                                                      col: colIndex,
-                                                                      seat_id: seat.seat_id,
-                                                                      price: seatType.price,
-                                                                  })
-                                                              }
-                                                          >
-                                                              {seatIndex + 1}
-                                                          </span>
-                                                      )}
-                                                  </div>
-                                              ))}
-                                          </div>
-                                      ))}
-                                  </div>
-                                  <br />
-                                  <br />
-                                  <br />
-                              </div>
-                          ))}
-                      </div>
-                  </div>
-              ))}
-          </div>
-      );
-  };
-
-  const handleBooking = async () => {
-    try {
-        const response = await axios.post(
-            `https://movie-ticket-bookingapplication-1.onrender.com/booking/bookticket`,
-            {
-                showTime: selectedTime.showTime,
-                showDate: date,
-                movieId: _id, // Changed to _id which seems to be the correct parameter
-                screenId: theater_id, // Ensure screen is defined
-                seats: selectedSeats,
-                totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
-                paymentId: '123456789',
-                paymentType: 'online',
-            },
-            { withCredentials: true }
+        const schedule = screen.movieSchedulesforDate.find(
+            (t) => t.showTime === selectedTime.showTime
         );
+        const notAvailableSeats = schedule ? schedule.notAvailableSeats : [];
 
-        if (response.data.ok) {
-            toast.success('Booking Successful');
-            console.log(response.data);
-        } else {
-            console.log(response.data);
+        return (
+            <div>
+                {screen.screen.seats.map((seatType, index) => (
+                    <div className="seat-type" key={index}>
+                        <h2>{seatType.type} - Rs. {seatType.price}</h2>
+                        <div className='seat-rows'>
+                            {seatType.rows.map((row, rowIndex) => (
+                                <div className="seat-row" key={rowIndex}>
+                                    <p className="rowname">{row.rowname}</p>
+                                    <div className="seat-cols">
+                                        {row.cols.map((col, colIndex) => (
+                                            <div className="seat-col" key={colIndex}>
+                                                {col.seats.map((seat, seatIndex) => (
+                                                    <div key={seatIndex}>
+                                                        {notAvailableSeats.find(
+                                                            (s) =>
+                                                                s.row === row.rowname &&
+                                                                s.seat_id === seat.seat_id &&
+                                                                s.col === colIndex
+                                                        ) ? (
+                                                            <span className='seat-unavailable'>{seatIndex + 1}</span>
+                                                        ) : (
+                                                            <span
+                                                                className={
+                                                                    selectedSeats.find(
+                                                                        (s) =>
+                                                                            s.row === row.rowname &&
+                                                                            s.seat_id === seat.seat_id &&
+                                                                            s.col === colIndex
+                                                                    )
+                                                                        ? 'seat-selected'
+                                                                        : 'seat-available'
+                                                                }
+                                                                onClick={() =>
+                                                                    selectDeselectSeat({
+                                                                        row: row.rowname,
+                                                                        col: colIndex,
+                                                                        seat_id: seat.seat_id,
+                                                                        price: seatType.price,
+                                                                    })
+                                                                }
+                                                            >
+                                                                {seatIndex + 1}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
+    const handleBooking = async () => {
+        try {
+            const response = await axios.post(
+                `https://movie-ticket-bookingapplication-1.onrender.com/booking/bookticket`,
+                {
+                    showTime: selectedTime.showTime,
+                    showDate: date,
+                    movieId: _id,
+                    screenId: theater_id,
+                    seats: selectedSeats,
+                    totalPrice: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
+                    paymentId: '123456789',
+                    paymentType: 'online',
+                },
+                { withCredentials: true }
+            );
+
+            if (response.data.ok) {
+                toast.success('Booking Successful');
+                console.log(response.data);
+            } else {
+                console.log(response.data);
+            }
+        } catch (error) {
+            console.log(error);
         }
-    } catch (error) {
-        console.log(error);
-    }
-};
+    };
 
     return (
         <div className='selectseatpage'>
@@ -187,7 +186,7 @@ const SelectSeatPage = () => {
                 <div className='s1'>
                     <div className='head'>
                         <h1>{movie.title} - {screen?.screen?.name}</h1>
-                        {Array.isArray(movie.genre) && <h3>{movie.genre.join(' / ')}</h3>} {/* Check if movie.genre is an array */}
+                        {Array.isArray(movie.genre) && <h3>{movie.genre.join(' / ')}</h3>}
                     </div>
                 </div>
             )}
@@ -241,6 +240,9 @@ const SelectSeatPage = () => {
 };
 
 export default SelectSeatPage;
+
+
+
 
 "use client"
 // import React, { useEffect, useState } from 'react'
