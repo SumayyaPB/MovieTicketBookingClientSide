@@ -269,13 +269,14 @@ const SelectSeatPage = () => {
           console.log("Schedule Data:", data);
           if (
             data &&
-            data.movieSchedulesforDate &&
-            data.movieSchedulesforDate.length > 0
+            data.theaters &&
+            data.theaters.movieSchedules &&
+            data.theaters.movieSchedules.length > 0
           ) {
-            setScreen(data);
-            setSelectedTime(data.movieSchedulesforDate[0]); // Initialize selectedTime
+            setScreen(data.theaters);
+            setSelectedTime(data.theaters.movieSchedules[0]); // Initialize selectedTime
           } else {
-            console.log(response.data);
+            console.log("No schedules found:", response.data);
           }
         } else {
           console.error("Failed to fetch movie schedule:", response.data);
@@ -329,12 +330,12 @@ const SelectSeatPage = () => {
   };
 
   const generateSeatLayout = () => {
-    if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null;
+    if (!screen || !selectedTime || !screen.movieSchedules) return null;
 
     return (
       <div>
-        {screen.screen?.seats?.length > 0 &&
-          screen.screen.seats.map((seatType, index) => (
+        {screen.seats?.length > 0 &&
+          screen.seats.map((seatType, index) => (
             <div className="seat-type" key={index}>
               <h2>
                 {seatType.type} - Rs. {seatType.price}
@@ -353,7 +354,7 @@ const SelectSeatPage = () => {
                                   <div key={seatIndex}>
                                     <span
                                       className={
-                                        screen.movieSchedulesforDate[0]?.notAvailableSeats?.find(
+                                        selectedTime.notAvailableSeats?.find(
                                           (s) =>
                                             s.row === row.rowname &&
                                             s.seat_id === seat.seat_id &&
@@ -432,7 +433,7 @@ const SelectSeatPage = () => {
         <div className="s1">
           <div className="head">
             <h1>
-              {movie.title} - {screen?.screen?.name}
+              {movie.title} - {screen.theaterName}
             </h1>
             {Array.isArray(movie.genre) && <h3>{movie.genre.join(" / ")}</h3>}
           </div>
@@ -442,7 +443,7 @@ const SelectSeatPage = () => {
       {screen && (
         <div className="selectseat">
           <div className="timecont">
-            {screen.movieSchedulesforDate?.map((time, index) => (
+            {screen.movieSchedules?.map((time, index) => (
               <h3
                 key={index}
                 className={
