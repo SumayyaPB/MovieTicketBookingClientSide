@@ -323,20 +323,20 @@ const SelectSeatPage = () => {
 
     const generateSeatLayout = () => {
         if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null;
-
+    
         return (
             <div>
-                {screen.screen?.seats?.map((seatType, index) => (
+                {screen.screen?.seats?.length > 0 && screen.screen.seats.map((seatType, index) => (
                     <div className="seat-type" key={index}>
                         <h2>{seatType.type} - Rs. {seatType.price}</h2>
                         <div className='seat-rows'>
-                            {seatType.rows?.map((row, rowIndex) => (
+                            {seatType.rows?.length > 0 && seatType.rows.map((row, rowIndex) => (
                                 <div className="seat-row" key={rowIndex}>
                                     <p className="rowname">{row.rowname}</p>
                                     <div className="seat-cols">
-                                        {row.cols?.map((col, colIndex) => (
+                                        {row.cols?.length > 0 && row.cols.map((col, colIndex) => (
                                             <div className="seat-col" key={colIndex}>
-                                                {col.seats?.map((seat, seatIndex) => (
+                                                {col.seats?.length > 0 && col.seats.map((seat, seatIndex) => (
                                                     <div key={seatIndex}>
                                                         <span
                                                             className={
@@ -383,6 +383,7 @@ const SelectSeatPage = () => {
             </div>
         );
     };
+    
 
     const handleBooking = async () => {
         try {
