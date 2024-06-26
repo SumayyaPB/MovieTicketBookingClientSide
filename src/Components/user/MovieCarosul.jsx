@@ -110,7 +110,7 @@ const MovieCarousel = () => {
         </Swiper>
       ) : (
         // <p>Loading...</p>
-        <div className="d-flex justify-content-center gap-5">
+        <div className="d-flex justify-content-center gap-5 flex-wrap">
           <StaticMovie title="Bigil" img={cardImg1} />
           <StaticMovie title="" img={cardImg2} />
           <StaticMovie title="Bigil" img={cardImg3} />
