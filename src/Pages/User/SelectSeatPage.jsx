@@ -268,9 +268,9 @@ const SelectSeatPage = () => {
                 if (response.status === 200) {
                     const data = response.data;
                     console.log('Schedule Data:', data);
-                    if (data && data.movieSchedules && data.movieSchedules.length > 0) {
+                    if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
                         setScreen(data);
-                        
+                        setSelectedTime(data.movieSchedulesforDate[0]); // Initialize selectedTime
                     } else {
                         console.log(response.data);
                     }
@@ -322,25 +322,25 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-        if (!screen || !selectedTime || !screen.movieSchedules) return null;
+        if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null;
 
         return (
             <div>
-                {screen.screen.seats.map((seatType, index) => (
+                {screen.screen?.seats?.map((seatType, index) => (
                     <div className="seat-type" key={index}>
                         <h2>{seatType.type} - Rs. {seatType.price}</h2>
                         <div className='seat-rows'>
-                            {seatType.rows.map((row, rowIndex) => (
+                            {seatType.rows?.map((row, rowIndex) => (
                                 <div className="seat-row" key={rowIndex}>
                                     <p className="rowname">{row.rowname}</p>
                                     <div className="seat-cols">
-                                        {row.cols.map((col, colIndex) => (
+                                        {row.cols?.map((col, colIndex) => (
                                             <div className="seat-col" key={colIndex}>
-                                                {col.seats.map((seat, seatIndex) => (
+                                                {col.seats?.map((seat, seatIndex) => (
                                                     <div key={seatIndex}>
                                                         <span
                                                             className={
-                                                                screen.movieSchedulesforDate[0]?.notAvailableSeats.find(
+                                                                screen.movieSchedulesforDate[0]?.notAvailableSeats?.find(
                                                                     (s) =>
                                                                         s.row === row.rowname &&
                                                                         s.seat_id === seat.seat_id &&
@@ -427,7 +427,7 @@ const SelectSeatPage = () => {
             {screen && (
                 <div className='selectseat'>
                     <div className='timecont'>
-                        {screen.movieSchedulesforDate.map((time, index) => (
+                        {screen.movieSchedulesforDate?.map((time, index) => (
                             <h3
                                 key={index}
                                 className={selectedTime?._id === time._id ? 'time selected' : 'time'}
@@ -473,9 +473,3 @@ const SelectSeatPage = () => {
 };
 
 export default SelectSeatPage;
-
-
-
-
-
-
