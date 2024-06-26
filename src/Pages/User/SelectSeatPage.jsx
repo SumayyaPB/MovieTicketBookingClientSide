@@ -268,9 +268,9 @@ const SelectSeatPage = () => {
                 if (response.status === 200) {
                     const data = response.data;
                     console.log('Schedule Data:', data);
-                    if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
+                    if (data && data.movieSchedules && data.movieSchedules.length > 0) {
                         setScreen(data);
-                        setSelectedTime(data.movieSchedulesforDate[0]);
+                        setSelectedTime(data.movieSchedules[0]);
                     } else {
                         console.error('No movie schedules found.');
                     }
@@ -322,7 +322,7 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-        if (!screen || !selectedTime || !screen.movieSchedulesforDate) return null;
+        if (!screen || !selectedTime || !screen.movieSchedules) return null;
 
         return (
             <div>
