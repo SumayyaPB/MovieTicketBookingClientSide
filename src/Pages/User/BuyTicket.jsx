@@ -75,7 +75,7 @@ const BuyTicketsPage = () => {
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
-
+  console.log(selectedDate)
   return (
     <>
       {movie && (
@@ -91,6 +91,7 @@ const BuyTicketsPage = () => {
               value={selectedDate} 
               onChange={handleDateChange} 
             />
+
           </div>  
           {theatres && theatres.length > 0 && (
             <div className="screens">
