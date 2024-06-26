@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import "./BuyTicket.css";
 import { useNavigate, useParams } from "react-router-dom";

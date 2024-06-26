@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import './SelectSeat.css';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { log } from 'console';
 
 const SelectSeatPage = () => {
     const navigate = useNavigate();
@@ -15,6 +17,7 @@ const SelectSeatPage = () => {
     const [selectedTime, setSelectedTime] = useState(null);
     const [movie, setMovie] = useState(null);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    console.log(_id, date, theater_id )
 
     useEffect(() => {
         const getSchedules = async () => {
