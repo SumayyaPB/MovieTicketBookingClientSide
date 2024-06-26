@@ -1,15 +1,14 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import "./BuyTicket.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-
 const BuyTicketsPage = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const { _id } = params;
+
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]); // Initialize to today's date in YYYY-MM-DD format
   const [movie, setMovie] = useState(null);
   const [theatres, setTheatres] = useState(null);
 
@@ -37,8 +36,6 @@ const BuyTicketsPage = () => {
       console.error(err);
     }
   };
-
-  
 
   const getTheatres = async () => {
     try {
@@ -76,7 +73,7 @@ const BuyTicketsPage = () => {
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
-};
+  };
 
   return (
     <>
@@ -88,24 +85,12 @@ const BuyTicketsPage = () => {
               {/* <h3>{ movie.genre.join(", ") }</h3> */}
               <img src={movie.movieImg} alt="" />
             </div>
-             {/* <DatePicker
-              getSelectedDay={(date) => {
-                console.log(date);
-                setSelectedDate(date);
-              }}
-              endDate={100}
-              selectDate={selectedDate}
-              labelFormat={"MMMM"}
-              color={"rgb(248, 68, 100)"}
-            /> */}
             <input 
-            type="date" 
-            value={selectedDate} 
-            onChange={handleDateChange} 
-        />
+              type="date" 
+              value={selectedDate} 
+              onChange={handleDateChange} 
+            />
           </div>  
-          
-
           {theatres && theatres.length > 0 && (
             <div className="screens">
               {theatres.map((theater, index) => (
