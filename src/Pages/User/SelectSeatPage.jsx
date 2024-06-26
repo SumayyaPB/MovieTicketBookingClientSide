@@ -83,12 +83,12 @@ const SelectSeatPage = () => {
     };
 
     const generateSeatLayout = () => {
-        if (!theater || !selectedTime || !theater.movieSchedulesforDate) return null;
+        if (!theater || !selectedTime || !theater.movieSchedulesforDate) return null; // Ensure screen and selectedTime are defined
 
-        const schedule = theater.movieSchedulesforDate.find(
+        const x = theater.movieSchedulesforDate.findIndex(
             (t) => t.showTime === selectedTime.showTime
         );
-        const notAvailableSeats = schedule ? schedule.notAvailableSeats : [];
+        const notAvailableSeats = theater.movieSchedulesforDate[x]?.seats || [];
 
         return (
             <div>
