@@ -269,8 +269,9 @@ const SelectSeatPage = () => {
                 );
                 if (response.status === 200) {
                     const data = response.data;
-                    console.log(data , data.movieSchedulesforDate , data.movieSchedulesforDate.length)
+                    console.log(data , data.movieSchedulesforDate )
                     if (data && data.movieSchedulesforDate && data.movieSchedulesforDate.length > 0) {
+                        console.log(data , data.movieSchedulesforDate )
                         setScreen(data);
                         setSelectedTime(data.movieSchedulesforDate[0]);
                     }
