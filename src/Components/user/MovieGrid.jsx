@@ -23,7 +23,7 @@ const MovieCard = ({ movie }) => {
           {rating}/10
         </p>
       </div>
-      <div className="details">
+      <div className="details text-black">
         <p className="title">{title}</p>
         <p className="type">{Array.isArray(genre) ? genre.join(", ") : genre}</p>
       </div>
