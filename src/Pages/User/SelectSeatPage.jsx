@@ -244,9 +244,9 @@
 
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
-import "./SelectSeat.css";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import "./SelectSeat.css";
 
 const SelectSeatPage = () => {
   const params = useParams();
@@ -268,7 +268,7 @@ const SelectSeatPage = () => {
         if (response.status === 200) {
           const data = response.data;
           console.log("Schedule Data:", data);
-          setScreen(data.theaters);
+          setScreen(data.theaters); 
           setNotAvailableSeats(data.movieSchedules[0].notAvailableSeats);
           if (data.movieSchedules.length > 0) {
             setSelectedTime(data.movieSchedules[0]);
@@ -293,7 +293,7 @@ const SelectSeatPage = () => {
           { withCredentials: true }
         );
         if (response.status === 200) {
-          setMovie(response.data);
+          setMovie(response.data); 
           console.log("Movie Data:", response.data);
         } else {
           console.error("Failed to fetch movie details:", response.data);
@@ -323,69 +323,6 @@ const SelectSeatPage = () => {
       );
     } else {
       setSelectedSeats([...selectedSeats, seat]);
-    }
-  };
-
-  const handleBooking = async () => {
-    try {
-      const amount = selectedSeats.reduce((acc, seat) => acc + seat.price, 0);
-
-      const orderResponse = await axios.post(
-        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/order/create-order",
-        { amount },
-        { withCredentials: true }
-      );
-
-      if (orderResponse.status === 200) {
-        const { data } = orderResponse.data;
-
-        const options = {
-          key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
-          amount: data.amount,
-          currency: data.currency,
-          name: "Movie Ticket Booking",
-          description: "Test Transaction",
-          image: "/your_logo.png",
-          order_id: data.id,
-          handler: async (response) => {
-            const paymentData = {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            };
-
-            const verifyResponse = await axios.post(
-              "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/order/verify-payment",
-              paymentData,
-              { withCredentials: true }
-            );
-
-            if (verifyResponse.status === 200) {
-              alert("Payment Successful!");
-            } else {
-              alert("Payment Verification Failed!");
-            }
-          },
-          prefill: {
-            name: "sumayya",
-            email: "sumayya@gmail.com",
-            contact: "9999999999",
-          },
-          notes: {
-            address: "Razorpay Corporate Office",
-          },
-          theme: {
-            color: "#3399cc",
-          },
-        };
-
-        const rzp1 = new window.Razorpay(options);
-        rzp1.open();
-      } else {
-        console.error("Failed to create order:", orderResponse.data);
-      }
-    } catch (error) {
-      console.error("Error during booking:", error);
     }
   };
 
@@ -470,6 +407,60 @@ const SelectSeatPage = () => {
     );
   };
 
+  const handleBooking = async () => {
+    try {
+      const response = await axios.post(
+        `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/create-order`,
+        {
+          amount: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
+        }
+      );
+
+      const { amount, id: order_id, currency } = response.data.data;
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
+        amount: amount,
+        currency: currency,
+        name: "Movie Ticket Booking",
+        description: "Test Transaction",
+        image: "/your_logo.png",
+        order_id: order_id,
+        handler: async (response) => {
+          const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
+          await axios.post(
+            `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/verify-payment`,
+            {
+              razorpay_payment_id,
+              razorpay_order_id,
+              razorpay_signature,
+            }
+          );
+        },
+        prefill: {
+          name: "Your Name",
+          email: "youremail@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      if (window.Razorpay) {
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } else {
+        console.error("Razorpay SDK not loaded");
+      }
+    } catch (error) {
+      console.error("Error during booking", error);
+    }
+  };
+
   return (
     <div className="selectseatpage">
       {movie && (
@@ -492,9 +483,7 @@ const SelectSeatPage = () => {
             <button
               className='theme_btn1 linkstylenone'
               onClick={handleBooking}
-            >
-              Book Now
-            </button>
+            >Book Now</button>
           </div>
         </div>
       )}
