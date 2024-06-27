@@ -331,10 +331,14 @@ const SelectSeatPage = () => {
 
     return (
       <div>
+        <div className="d-flex justify-content-center flex-column">
+
         <h2>Theater Details</h2>
         <p> {screen.theaterName}</p>
         <p> {screen.location}</p>
-        <p> {screen.screenType}</p>
+        <p> ScreenType :{screen.screenType}</p>
+        </div>
+        
 
         {/* <h2>Movie Schedules</h2>
         <div>
