@@ -332,10 +332,9 @@ const SelectSeatPage = () => {
     return (
       <div>
         <h2>Theater Details</h2>
-        <p>Theater Name: {screen.theaterName}</p>
-        <p>Location: {screen.location}</p>
-        <p>City: {screen.city}</p>
-        <p>Screen Type: {screen.screenType}</p>
+        <p> {screen.theaterName}</p>
+        <p> {screen.location}</p>
+        <p> {screen.screenType}</p>
 
         {/* <h2>Movie Schedules</h2>
         <div>
@@ -465,7 +464,7 @@ const SelectSeatPage = () => {
     <div className="selectseatpage">
       {movie && (
         <div className="s1">
-          <div className="head">
+          <div className="head text-white">
             <h1>{movie.title}</h1>
             {Array.isArray(movie.genre) && <h3>{movie.genre.join(" / ")}</h3>}
           </div>

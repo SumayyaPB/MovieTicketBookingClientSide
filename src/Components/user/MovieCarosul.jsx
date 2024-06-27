@@ -112,9 +112,9 @@ const MovieCarousel = () => {
         // <p>Loading...</p>
         <div className="d-flex justify-content-center gap-5 flex-wrap">
           <StaticMovie title="Bigil" img={cardImg1} />
-          <StaticMovie title="" img={cardImg2} />
-          <StaticMovie title="Bigil" img={cardImg3} />
-          <StaticMovie title="Bigil" img={cardImg4} />
+          <StaticMovie title="Don" img={cardImg2} />
+          <StaticMovie title="Jawan" img={cardImg3} />
+          <StaticMovie title="Jailer" img={cardImg4} />
         </div>
       )}
     </div>
