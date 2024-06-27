@@ -410,7 +410,7 @@ const SelectSeatPage = () => {
   const handleBooking = async () => {
     try {
       const response = await axios.post(
-        `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/create-order`,
+        `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/order/create-order`,
         {
           amount: selectedSeats.reduce((acc, seat) => acc + seat.price, 0),
         }
@@ -429,7 +429,7 @@ const SelectSeatPage = () => {
         handler: async (response) => {
           const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
           await axios.post(
-            `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/verify-payment`,
+            `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/order/verify-payment`,
             {
               razorpay_payment_id,
               razorpay_order_id,
