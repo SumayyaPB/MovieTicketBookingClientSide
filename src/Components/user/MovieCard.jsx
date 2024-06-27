@@ -94,7 +94,7 @@ const MovieSlider = ({ movies }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          arrows: true,
+          arrows: false,
           loop: true,
           autoplay: true, // Enables autoplay
           autoplaySpeed: 2000, // Speed of autoplay in milliseconds (3000ms = 3s)
