@@ -272,8 +272,7 @@ const SelectSeatPage = () => {
           setNotAvailableSeats(data.movieSchedules[0].notAvailableSeats);
           if (data.movieSchedules.length > 0) {
             setSelectedTime(data.movieSchedules[0]);
-          } else {
-            console.log("No schedules found.");
+            console.log(data.movieSchedules);
           }
         } else {
           console.error("Failed to fetch movie schedule:", response.data);
