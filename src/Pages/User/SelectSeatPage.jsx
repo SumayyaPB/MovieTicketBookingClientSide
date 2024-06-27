@@ -268,7 +268,8 @@ const SelectSeatPage = () => {
         if (response.status === 200) {
           const data = response.data;
           console.log("Schedule Data:", data);
-          setScreen(data); 
+          setScreen(data.theaters); // Set the theater details
+          setNotAvailableSeats(data.movieSchedules[0].notAvailableSeats);
           if (data.movieSchedules.length > 0) {
             setSelectedTime(data.movieSchedules[0]);
           } else {
@@ -293,7 +294,7 @@ const SelectSeatPage = () => {
           { withCredentials: true }
         );
         if (response.status === 200) {
-          setMovie(response.data); 
+          setMovie(response.data); // Set movie details
           console.log("Movie Data:", response.data);
         } else {
           console.error("Failed to fetch movie details:", response.data);
@@ -342,12 +343,12 @@ const SelectSeatPage = () => {
           {screen.movieSchedules?.map((schedule, index) => (
             <div key={index}>
               <p>Show Time: {schedule.showTime}</p>
-              <p>Show Date: {schedule.showDate}</p>
+              <p>Show Date: {new Date(schedule.showDate).toLocaleDateString()}</p>
             </div>
           ))}
         </div>
 
-        {screen.screen.seats.map((seatType, index) => (
+        {screen.seats.map((seatType, index) => (
           <div className="seat-type" key={index}>
             <h2>{seatType.type} - Rs. {seatType.price}</h2>
             <div className='seat-rows'>
