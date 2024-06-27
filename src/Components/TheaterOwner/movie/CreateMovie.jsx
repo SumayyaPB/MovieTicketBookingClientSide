@@ -48,7 +48,8 @@ const CreateMovie = () => {
         console.log(`${pair[0]}: ${pair[1]}`);
       }
 
-      const apiUrl = "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/addmovie";
+      const apiUrl =
+        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/addmovie";
       console.log("API URL:", apiUrl);
 
       const response = await axios.post(apiUrl, formData, {
@@ -61,20 +62,17 @@ const CreateMovie = () => {
       console.log(response);
       sessionStorage.setItem("token", response.data.token);
 
-      if(response.ok){
-        toast.success('movieImg creation successfull')
-      }else{
-        toast.error('movie creation failed')
+      if (response.ok) {
+        toast.success("movieImg creation successfull");
+      } else {
+        toast.error("movie creation failed");
       }
     } catch (error) {
       console.error("Error submitting the form:", error);
-      toast.error("movie Creation Failed")
+      toast.error("movie Creation Failed");
       // Something else caused the error
       console.error("Error message:", error.message);
     }
-
-    
-  
   };
 
   return (
@@ -95,7 +93,7 @@ const CreateMovie = () => {
           <input
             {...register("title")}
             placeholder="Title"
-            className="title createmovie-input"
+            className="ftitle createmovie-input"
           />
           <input
             {...register("description")}
@@ -138,9 +136,8 @@ const CreateMovie = () => {
           <input type="submit" className="submit" />
         </form>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
-    
   );
 };
 
