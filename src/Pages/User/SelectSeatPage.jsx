@@ -337,15 +337,15 @@ const SelectSeatPage = () => {
         <p>City: {screen.city}</p>
         <p>Screen Type: {screen.screenType}</p>
 
-        <h2>Movie Schedules</h2>
+        {/* <h2>Movie Schedules</h2>
         <div>
           {screen.movieSchedules?.map((schedule, index) => (
             <div key={index}>
               <p>Show Time: {schedule.showTime}</p>
               <p>Show Date: {new Date(schedule.showDate).toLocaleDateString()}</p>
-            </div>
+            </div> 
           ))}
-        </div>
+        </div> */}
 
         {screen.seats.map((seatType, index) => (
           <div className="seat-type" key={index}>
