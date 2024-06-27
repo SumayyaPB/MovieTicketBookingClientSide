@@ -354,7 +354,7 @@ const SelectSeatPage = () => {
               {seatType.rows.map((row, rowIndex) => (
                 <div className="seat-row" key={rowIndex}>
                   <p className="rowname">{row.rowname}</p>
-                  <div className="seat-cols">
+                  <div className="seat-cols flex-wrap">
                     {row.cols.map((col, colIndex) => (
                       <div className="seat-col" key={colIndex}>
                         {col.seats.map((seat, seatIndex) => (
