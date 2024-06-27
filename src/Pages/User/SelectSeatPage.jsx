@@ -256,11 +256,11 @@ const SelectSeatPage = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [movie, setMovie] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [notAvailableSeats, setNotAvailableSeats] = useState([]); // Assuming this is fetched or passed from somewhere
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch movie schedules for the theater and date
         const response = await axios.get(
           `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/theater/schedulebymovie/${theater_id}/${date}/${_id}`,
           { withCredentials: true }
@@ -268,9 +268,9 @@ const SelectSeatPage = () => {
         if (response.status === 200) {
           const data = response.data;
           console.log("Schedule Data:", data);
-          setScreen(data); // Set the entire screen data including theater details
+          setScreen(data); 
           if (data.movieSchedules.length > 0) {
-            setSelectedTime(data.movieSchedules[0]); // Initialize selectedTime
+            setSelectedTime(data.movieSchedules[0]);
           } else {
             console.log("No schedules found.");
           }
@@ -288,13 +288,12 @@ const SelectSeatPage = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        // Fetch movie details based on movie ID
         const response = await axios.get(
           `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/movie/getmovies/${_id}`,
           { withCredentials: true }
         );
         if (response.status === 200) {
-          setMovie(response.data); // Set movie details
+          setMovie(response.data); 
           console.log("Movie Data:", response.data);
         } else {
           console.error("Failed to fetch movie details:", response.data);
@@ -344,17 +343,69 @@ const SelectSeatPage = () => {
             <div key={index}>
               <p>Show Time: {schedule.showTime}</p>
               <p>Show Date: {schedule.showDate}</p>
-              {/* Add more details as needed */}
             </div>
           ))}
         </div>
 
-        {/* Implement seat selection logic here */}
+        {screen.screen.seats.map((seatType, index) => (
+          <div className="seat-type" key={index}>
+            <h2>{seatType.type} - Rs. {seatType.price}</h2>
+            <div className='seat-rows'>
+              {seatType.rows.map((row, rowIndex) => (
+                <div className="seat-row" key={rowIndex}>
+                  <p className="rowname">{row.rowname}</p>
+                  <div className="seat-cols">
+                    {row.cols.map((col, colIndex) => (
+                      <div className="seat-col" key={colIndex}>
+                        {col.seats.map((seat, seatIndex) => (
+                          <div key={seatIndex}>
+                            {notAvailableSeats.find(
+                              (s) =>
+                                s.row === row.rowname &&
+                                s.seat_id === seat.seat_id &&
+                                s.col === colIndex
+                            ) ? (
+                              <span className='seat-unavailable'>{seatIndex + 1}</span>
+                            ) : (
+                              <span
+                                className={
+                                  selectedSeats.find(
+                                    (s) =>
+                                      s.row === row.rowname &&
+                                      s.seat_id === seat.seat_id &&
+                                      s.col === colIndex
+                                  )
+                                    ? 'seat-selected'
+                                    : 'seat-available'
+                                }
+                                onClick={() =>
+                                  selectDeselectSeat({
+                                    row: row.rowname,
+                                    col: colIndex,
+                                    seat_id: seat.seat_id,
+                                    price: seatType.price,
+                                  })
+                                }
+                              >
+                                {seatIndex + 1}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <br />
+                  <br />
+                  <br />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     );
   };
-
-  // Handle booking logic here
 
   return (
     <div className="selectseatpage">
