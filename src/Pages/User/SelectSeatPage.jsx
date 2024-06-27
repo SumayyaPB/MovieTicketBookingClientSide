@@ -331,7 +331,7 @@ const SelectSeatPage = () => {
       const amount = selectedSeats.reduce((acc, seat) => acc + seat.price, 0);
 
       const orderResponse = await axios.post(
-        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/create-order",
+        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/order/create-order",
         { amount },
         { withCredentials: true }
       );
@@ -355,7 +355,7 @@ const SelectSeatPage = () => {
             };
 
             const verifyResponse = await axios.post(
-              "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/verify-payment",
+              "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/order/verify-payment",
               paymentData,
               { withCredentials: true }
             );
