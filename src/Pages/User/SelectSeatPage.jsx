@@ -326,9 +326,67 @@ const SelectSeatPage = () => {
     }
   };
 
-  const handleBooking = () => {
-    // Handle booking logic here
-    console.log("Booking seats:", selectedSeats);
+  const handleBooking = async () => {
+    try {
+      const amount = selectedSeats.reduce((acc, seat) => acc + seat.price, 0);
+
+      const orderResponse = await axios.post(
+        "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/create-order",
+        { amount },
+        { withCredentials: true }
+      );
+
+      if (orderResponse.status === 200) {
+        const { data } = orderResponse.data;
+
+        const options = {
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+          amount: data.amount,
+          currency: data.currency,
+          name: "Movie Ticket Booking",
+          description: "Test Transaction",
+          image: "/your_logo.png",
+          order_id: data.id,
+          handler: async (response) => {
+            const paymentData = {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            };
+
+            const verifyResponse = await axios.post(
+              "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/payment/verify-payment",
+              paymentData,
+              { withCredentials: true }
+            );
+
+            if (verifyResponse.status === 200) {
+              alert("Payment Successful!");
+            } else {
+              alert("Payment Verification Failed!");
+            }
+          },
+          prefill: {
+            name: "sumayya",
+            email: "sumayya@gmail.com",
+            contact: "9999999999",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+      } else {
+        console.error("Failed to create order:", orderResponse.data);
+      }
+    } catch (error) {
+      console.error("Error during booking:", error);
+    }
   };
 
   const generateSeatLayout = () => {
