@@ -256,7 +256,7 @@ const SelectSeatPage = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [movie, setMovie] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [notAvailableSeats, setNotAvailableSeats] = useState([]); // Assuming this is fetched or passed from somewhere
+  const [notAvailableSeats, setNotAvailableSeats] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -268,7 +268,7 @@ const SelectSeatPage = () => {
         if (response.status === 200) {
           const data = response.data;
           console.log("Schedule Data:", data);
-          setScreen(data.theaters); // Set the theater details
+          setScreen(data.theaters);
           setNotAvailableSeats(data.movieSchedules[0].notAvailableSeats);
           if (data.movieSchedules.length > 0) {
             setSelectedTime(data.movieSchedules[0]);
@@ -293,7 +293,7 @@ const SelectSeatPage = () => {
           { withCredentials: true }
         );
         if (response.status === 200) {
-          setMovie(response.data); // Set movie details
+          setMovie(response.data);
           console.log("Movie Data:", response.data);
         } else {
           console.error("Failed to fetch movie details:", response.data);
@@ -324,6 +324,11 @@ const SelectSeatPage = () => {
     } else {
       setSelectedSeats([...selectedSeats, seat]);
     }
+  };
+
+  const handleBooking = () => {
+    // Handle booking logic here
+    console.log("Booking seats:", selectedSeats);
   };
 
   const generateSeatLayout = () => {
@@ -418,7 +423,23 @@ const SelectSeatPage = () => {
         </div>
       )}
 
-      {screen && <div className="selectseat">{generateSeatLayout()}</div>}
+      {screen && (
+        <div className="selectseat">
+          {generateSeatLayout()}
+          <div className="totalcont">
+            <div className="total">
+              <h2>Total</h2>
+              <h3>Rs. {selectedSeats.reduce((acc, seat) => acc + seat.price, 0)}</h3>
+            </div>
+            <button
+              className='theme_btn1 linkstylenone'
+              onClick={handleBooking}
+            >
+              Book Now
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
