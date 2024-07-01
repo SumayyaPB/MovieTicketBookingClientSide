@@ -21,10 +21,11 @@ import DeleteTheater from "./Components/TheaterOwner/Theater/DeleteTheater";
 
 import BookingPage from "./Pages/User/BuyTicket";
 
-import UserSidebar from "./Components/user/UserSidebar";
+// import UserSidebar from "./Components/user/UserSidebar";
 
 import MoviePage from "./Pages/User/MoviePage";
 import SelectSeatPage from "./Pages/User/SelectSeatPage";
+import ProfilePage from "./Components/user/UserDashboard";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,8 @@ const router = createBrowserRouter([
       
       {
         path: "/userDashboard",
-        element: <UserSidebar/>,
+        // element: <UserSidebar/>,
+        element: <ProfilePage/>
         
       }
     ]
