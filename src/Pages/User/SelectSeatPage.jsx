@@ -327,7 +327,7 @@ const SelectSeatPage = () => {
   };
 
   const generateSeatLayout = () => {
-    if (!screen || !selectedTime || !screen.seats) return null;
+    // if (!screen || !selectedTime || !screen.seats) return null;
 
     return (
       <div>
