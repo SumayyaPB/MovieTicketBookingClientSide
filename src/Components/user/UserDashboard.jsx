@@ -130,7 +130,7 @@ const ProfilePage = () => {
   const getBookings = async () => {
     try {
       const response = await axios.get(
-        `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/booking/getuserbookings`,
+        `https://movie-ticket-bookingapplication-1.onrender.com/api/v1/booking/bookingticket`,
         {
           headers: {
             "Content-Type": "application/json",
