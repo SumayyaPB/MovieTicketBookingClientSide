@@ -35,24 +35,6 @@ const Header = () => {
     }
   };
 
-  // const checkLoginStatus = async () => {
-  //   try {
-
-  //     const response = await axios.get("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/checklogin", {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       withCredentials: true,
-  //     });
-
-  //     console.log("Check login response:", response.data);
-  //     setIsLoggedIn(response.data.ok);
-  //   } catch (error) {
-  //     console.error("Login status check error:", error);
-  //     setIsLoggedIn(false);
-  //   }
-  // };
-
   const checkLoginStatus = async () => {
     try {
       const response = await axios.get("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/checklogin", {
