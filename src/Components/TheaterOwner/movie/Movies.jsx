@@ -6,7 +6,7 @@ import { BsFillStarFill } from "react-icons/bs";
 import './Movies.css'
 
 const Movies = () => {
-  const { setValue, watch } = useForm();
+  const { setValue } = useForm();
   const [movies, setMovies] = useState([]);
 
   const getMovies = async () => {
@@ -40,14 +40,11 @@ const Movies = () => {
 
   return (
     <div className="movie-items">
-      <h1>Movies</h1>
+      <h1 className="text-center">Movies</h1>
       <div className="d-flex flex-wrap gap-3">
         {movies.length > 0 ? (
           movies.map((movie, index) => (
             <div
-              className={
-                watch("movieId") === movie._id ? "item selected" : "item"
-              }
               key={index}
               onClick={() => setValue("movieId", movie._id)}
             >
@@ -67,10 +64,6 @@ const Movies = () => {
               >
                 delete <img src={deleteIcon} className="dlticon"/>
               </button>
-              {/* <img src={deleteIcon} alt="" onClick={(e) => {
-                e.stopPropagation();
-                deleteMovie(movie._id);
-              }}/> */}
             </div>
           ))
         ) : (
