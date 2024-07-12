@@ -85,14 +85,6 @@ const Sidebar = () => {
                     Add Schedule
                   </Link>
                 </li>
-                {/* <li className="sidebar-item list-unstyled">
-                  <Link
-                    className="sidebar-link text-decoration-none text-dark"
-                    to="/theaterowner/components/theater/updateTheater"
-                  >
-                    Update Theater
-                  </Link>
-                </li> */}
                 <li className="sidebar-item list-unstyled">
                   <Link
                     className="sidebar-link text-decoration-none text-dark"
