@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "./Movie.css";
+import { Navigate } from "react-router-dom";
 
 const genres = [
   "Action",
@@ -64,6 +65,7 @@ const CreateMovie = () => {
 
       if (response.status === 201) {
         toast.success("movieImg creation successfull");
+        Navigate('/theaterowner/components/theater/deleteTheater')
       } else {
         toast.error("movie creation failed");
       }
