@@ -50,7 +50,11 @@ const Movies = () => {
               <button onClick={(e) => {
                 e.stopPropagation();
                 deleteMovie(movie._id);
-              }}> <img src={deleteIcon} alt="" /> </button>
+              }}>delete</button>
+              <img src={deleteIcon} alt="" onClick={(e) => {
+                e.stopPropagation();
+                deleteMovie(movie._id);
+              }}/>
             </div>
           ))
         ) : (
