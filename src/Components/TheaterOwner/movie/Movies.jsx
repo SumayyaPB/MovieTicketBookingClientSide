@@ -63,6 +63,7 @@ const Movies = () => {
                   e.stopPropagation();
                   deleteMovie(movie._id);
                 }}
+                className="dlt-btn"
               >
                 delete <img src={deleteIcon} className="dlticon"/>
               </button>

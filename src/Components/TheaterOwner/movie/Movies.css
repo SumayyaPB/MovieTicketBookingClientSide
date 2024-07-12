@@ -5,7 +5,16 @@
     padding: 20px;
     cursor: pointer;
     transition: background-color .3s ease;
+    width: 0;
 }
 .dlticon{
   width: 25px;
 }
+.dlt-btn {
+    width: 100%;
+    background-color: #415c41;
+    border: none;
+    height: 35px;
+    border-radius: 6px;
+}
+
