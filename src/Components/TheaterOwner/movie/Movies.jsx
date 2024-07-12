@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import deleteIcon from "../../../assets/deleteIcon.svg"
 
 const Movies = () => {
   const { setValue, watch } = useForm();
@@ -49,7 +50,7 @@ const Movies = () => {
               <button onClick={(e) => {
                 e.stopPropagation();
                 deleteMovie(movie._id);
-              }}>Delete</button>
+              }}> <img src={deleteIcon} alt="" /> </button>
             </div>
           ))
         ) : (
