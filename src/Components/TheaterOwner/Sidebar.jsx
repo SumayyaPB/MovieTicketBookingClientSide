@@ -8,15 +8,33 @@ const Sidebar = () => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+
+  // const checkLoginStatus = async () => {
+  //   try {
+  //     const response = await axios.get("https://movie-ticket-bookingapplication-1.onrender.com/api/v1/user/checklogin", {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       withCredentials: true,
+  //     });
+  
+  //     console.log("Check login response:", response.data);
+  //     setIsLoggedIn(response.data.ok);
+  //   } catch (error) {
+  //     console.error("Login status check error:", error);
+  //     setIsLoggedIn(false);
+  //   }
+  // };
+
   const checkAdminAuthentication = async () => {
     try {
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
       const response = await axios.get(
         "https://movie-ticket-bookingapplication-1.onrender.com/api/v1/admin/checkLogin",
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            // Authorization: `Bearer ${token}`,
           },
           withCredentials: true,
         }

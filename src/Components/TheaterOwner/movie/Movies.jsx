@@ -42,11 +42,10 @@ const Movies = () => {
               key={index}
               onClick={() => setValue("movieId", movie._id)}
             >
+              <img src={movie.movieImg} alt="" />
               <p>{movie.title}</p>
-              <p>{movie.description}</p>
               <p>{movie.rating}</p>
               <p>{Array.isArray(movie.genre) ? movie.genre.join(", ") : movie.genre}</p>
-              <p>{movie.duration}</p>
               <button onClick={(e) => {
                 e.stopPropagation();
                 deleteMovie(movie._id);
