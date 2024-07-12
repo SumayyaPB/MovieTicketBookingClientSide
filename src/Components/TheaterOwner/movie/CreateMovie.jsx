@@ -62,7 +62,7 @@ const CreateMovie = () => {
       console.log(response);
       sessionStorage.setItem("token", response.data.token);
 
-      if (response.ok) {
+      if (response.status === 201) {
         toast.success("movieImg creation successfull");
       } else {
         toast.error("movie creation failed");
