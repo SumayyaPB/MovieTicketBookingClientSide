@@ -17,6 +17,7 @@ const LoginComponent=() =>{
   const {
     register,
     handleSubmit,
+    setError,
     formState : {errors}
   } = useForm({resolver : yupResolver(userSchema)})
 
@@ -31,9 +32,16 @@ const LoginComponent=() =>{
 
       
     } catch (error) {
+      if (error.response && error.response.status === 400) {
+        // Assuming 401 is the status code for "incorrect password"
+        setError("password", {
+          type: "manual",
+          message: "Incorrect password",
+        });
+
       console.log(error);
 
-    }}
+    }}}
 
   
   
