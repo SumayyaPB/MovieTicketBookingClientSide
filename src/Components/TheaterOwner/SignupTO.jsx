@@ -20,6 +20,7 @@ const SignupTO = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
@@ -31,8 +32,21 @@ const SignupTO = () => {
           console.log(res.data);
           navigate('/theaterowner/login');
       } catch (error) {
-        console.log(error)
-      }}
+        if (error.response && error.response.status === 500) {
+          // Assuming 409 is the status code for "user already exists"
+          setError("email", {
+            type: "manual",
+            message: "User already exists",
+          });
+        } else {
+          setError("email", {
+            type: "manual",
+            message: "Registration failed",
+          });
+        }
+        console.error(error);
+      }
+    }
     
 
   return (
