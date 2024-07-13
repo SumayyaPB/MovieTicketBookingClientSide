@@ -32,7 +32,7 @@ const SignupTO = () => {
           console.log(res.data);
           navigate('/theaterowner/login');
       } catch (error) {
-        if (error.response && error.response.status === 500) {
+        if (error.response && error.response.status === 400) {
           // Assuming 409 is the status code for "user already exists"
           setError("email", {
             type: "manual",
