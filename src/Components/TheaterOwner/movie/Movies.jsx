@@ -39,7 +39,7 @@ const Movies = () => {
   }, []);
 
   return (
-    <div className="movie-items">
+    <div className="movie-items col-sm-9">
       <h1 className="text-center">Movies</h1>
       <div className="d-flex flex-wrap gap-3">
         {movies.length > 0 ? (
