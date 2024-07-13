@@ -6,7 +6,7 @@ import { BsFillStarFill } from "react-icons/bs";
 import './Movies.css'
 
 const Movies = () => {
-  const { setValue } = useForm();
+  const { watch,setValue } = useForm();
   const [movies, setMovies] = useState([]);
 
   const getMovies = async () => {
@@ -45,6 +45,7 @@ const Movies = () => {
         {movies.length > 0 ? (
           movies.map((movie, index) => (
             <div
+              className={watch("movieId") === movie._id ? "item selected" : "item"}
               key={index}
               onClick={() => setValue("movieId", movie._id)}
             >
