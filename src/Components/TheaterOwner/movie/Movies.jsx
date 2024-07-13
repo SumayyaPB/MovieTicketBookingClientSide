@@ -45,7 +45,7 @@ const Movies = () => {
         {movies.length > 0 ? (
           movies.map((movie, index) => (
             <div
-              className={watch("movieId") === movie._id ? "item selected" : "item"}
+              className={watch("movieId") === movie._id ? "item slctd" : "item"}
               key={index}
               onClick={() => setValue("movieId", movie._id)}
             >
