@@ -5,7 +5,7 @@ import * as yup from "yup";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import {Link} from 'react-router-dom'
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const userSchema = yup
   .object({
@@ -22,6 +22,7 @@ const SignUpComponent = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
@@ -33,9 +34,22 @@ const SignUpComponent = () => {
         console.log(res.data);
         navigate("/user/login")
     } catch (error) {
-      toast.error(error.message)
-      console.log(error)
-    }}
+      if (error.response && error.response.status === 409) {
+        // Assuming 409 is the status code for "user already exists"
+        setError("email", {
+          type: "manual",
+          message: "User already exists",
+        });
+      } else {
+        setError("email", {
+          type: "manual",
+          message: "Registration failed",
+        });
+      }
+      console.error(error);
+    }
+      
+    }
     
 
   return (
