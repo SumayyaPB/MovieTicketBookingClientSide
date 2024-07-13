@@ -108,7 +108,15 @@ const Sidebar = () => {
                     className="sidebar-link text-decoration-none text-dark"
                     to="/theaterowner/components/theater/deleteTheater"
                   >
-                    Delete Theater
+                    Delete Movies
+                  </Link>
+                </li>
+                <li className="sidebar-item list-unstyled">
+                  <Link
+                    className="sidebar-link text-decoration-none text-dark"
+                    to="/theaterowner/components/theater/deleteTheater"
+                  >
+                    Movies
                   </Link>
                 </li>
               </>
