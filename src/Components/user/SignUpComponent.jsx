@@ -34,7 +34,7 @@ const SignUpComponent = () => {
         console.log(res.data);
         navigate("/user/login")
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (error.response && error.response.status === 500) {
         // Assuming 409 is the status code for "user already exists"
         setError("email", {
           type: "manual",
