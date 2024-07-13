@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./SelectSeat.css";
+import { useNavigate } from "react-router-dom";
 
 const SelectSeatPage = () => {
   const params = useParams();
@@ -14,6 +15,7 @@ const SelectSeatPage = () => {
   const [movie, setMovie] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [notAvailableSeats, setNotAvailableSeats] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -186,6 +188,7 @@ const SelectSeatPage = () => {
               razorpay_signature,
             }
           );
+          navigate('/')
         },
         prefill: {
           name: "Your Name",
