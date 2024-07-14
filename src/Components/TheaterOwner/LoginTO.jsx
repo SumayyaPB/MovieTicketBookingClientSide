@@ -19,6 +19,7 @@ const LoginTO=() =>{
   const {
     register,
     handleSubmit,
+    setError,
     formState : {errors}
   } = useForm({resolver : yupResolver(userSchema)})
 
@@ -32,7 +33,23 @@ const LoginTO=() =>{
       
         navigate('/theaterowner');
     } catch (error) {
-      console.log(error)
+      if (error.response && error.response.status === 409) {
+        // Assuming 401 is the status code for "incorrect password"
+        setError("password", {
+          type: "manual",
+          message: "Incorrect password",
+        })}
+        else if (error.response && error.response.status === 400) {
+          // Assuming 404 is the status code for "user not found"
+          setError("email", {
+            type: "manual",
+            message: "Email not found",
+          });
+
+      console.log(error);
+
+    }
+      
     }}
   return (
     <div className="login">
