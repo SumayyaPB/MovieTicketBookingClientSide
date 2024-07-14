@@ -32,7 +32,7 @@ const LoginComponent=() =>{
 
       
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (error.response && error.response.status === 409) {
         // Assuming 401 is the status code for "incorrect password"
         setError("password", {
           type: "manual",
