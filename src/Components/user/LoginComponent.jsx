@@ -37,7 +37,13 @@ const LoginComponent=() =>{
         setError("password", {
           type: "manual",
           message: "Incorrect password",
-        });
+        })}
+        else if (error.response && error.response.status === 400) {
+          // Assuming 404 is the status code for "user not found"
+          setError("email", {
+            type: "manual",
+            message: "Email not found",
+          });
 
       console.log(error);
 
