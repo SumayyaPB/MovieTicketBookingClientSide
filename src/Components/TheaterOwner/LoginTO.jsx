@@ -33,24 +33,39 @@ const LoginTO=() =>{
       
         navigate('/theaterowner');
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        // Assuming 401 is the status code for "incorrect password"
-        setError("password", {
-          type: "manual",
-          message: "Incorrect password",
-        })}
-        else if (error.response && error.response.status === 400) {
-          // Assuming 404 is the status code for "user not found"
+      if (error.response) {
+        if (error.response.status === 409) {
+          // Assuming 409 is the status code for "incorrect password"
+          setError("password", {
+            type: "manual",
+            message: "Incorrect password",
+          });
+        } else if (error.response.status === 400) {
+          // Assuming 400 is the status code for "user not found"
           setError("email", {
             type: "manual",
             message: "Email not found",
           });
-
-      console.log(error);
-
+        } else {
+          // Handle other status codes
+          setError("general", {
+            type: "manual",
+            message: "An unexpected error occurred",
+          });
+        }
+      } else {
+        // Handle network or other errors
+        console.error("Error:", error);
+        setError("general", {
+          type: "manual",
+          message: "A network error occurred",
+        });
+        console.log(error);
+      }
     }
       
-    }}
+  }
+    
   return (
     <div className="login">
         <form onSubmit={handleSubmit(onSubmit)} className="form">
